@@ -21,3 +21,5 @@ TARGET_BOARD_INFO_FILE := device/wileyfox/kipper/board-info.txt
 
 # inherit from the proprietary version
 -include vendor/wileyfox/kipper/BoardConfigVendor.mk
+USE_CLANG_PLATFORM_BUILD := true
+ANDROID_COMPILE_WITH_JACK_AND_JILL := false
