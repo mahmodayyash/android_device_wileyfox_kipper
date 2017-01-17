@@ -21,10 +21,10 @@
 
     <!-- Minimum screen brightness setting allowed by the power manager.
          The user is forbidden from setting the brightness below this level. -->
-    <integer name="config_screenBrightnessSettingMinimum">10</integer>
+    <integer name="config_screenBrightnessSettingMinimum">1</integer>
 
     <!-- Minimum screen brightness allowed by the power manager. -->
-    <integer name="config_screenBrightnessDim">10</integer>
+    <integer name="config_screenBrightnessDim">6</integer>
 
     <!-- Minimum allowable screen brightness to use in a very dark room.
          This value sets the floor for the darkest possible auto-brightness
@@ -60,17 +60,22 @@
 
          Must be overridden in platform specific overlays -->
     <integer-array name="config_autoBrightnessLevels">
+        <item>1</item>        <!-- pitch black -->
         <item>5</item>
-        <item>25</item>
-        <item>50</item>
-        <item>100</item>
+        <item>9</item>
+        <item>14</item>
+        <item>25</item>       <!-- twilight -->
+        <item>50</item>       <!-- dim indoor -->
+        <item>100</item>      <!-- home -->
         <item>200</item>
-        <item>300</item>
-        <item>500</item>
+        <item>300</item>      <!-- office -->
+        <item>500</item>      <!-- sunrise -->
         <item>750</item>
-        <item>1000</item>
+        <item>1000</item>     <!-- overcast -->
         <item>2000</item>
-        <item>10000</item>
+        <item>5000</item>
+        <item>10000</item>    <!-- daylight -->
+        <item>20000</item>
     </integer-array>
 
     <!-- Array of output values for LCD backlight corresponding to the LUX values
@@ -79,18 +84,23 @@
          The brightness values must be between 0 and 255 and be non-decreasing.
          This must be overridden in platform specific overlays -->
     <integer-array name="config_autoBrightnessLcdBacklightValues">
-        <item>20</item>  <!-- 0-5  -->
-        <item>24</item>  <!-- 5-25  -->
-        <item>31</item>  <!-- 25-50 -->
-        <item>44</item>  <!-- 50-100 -->
-        <item>52</item>  <!-- 100-200 -->
-        <item>92</item>  <!-- 200-300 -->
-        <item>136</item> <!-- 300-500 -->
-        <item>187</item> <!-- 500-750 -->
-        <item>234</item> <!-- 750-1000 -->
-        <item>255</item> <!-- 1000-2000 -->
-        <item>255</item> <!-- 2000-10000 -->
-        <item>255</item> <!-- MELT FACES! -->
+        <item>7</item>
+        <item>8</item>
+        <item>10</item>
+        <item>12</item>
+        <item>17</item>
+        <item>29</item>
+        <item>35</item>
+        <item>47</item>
+        <item>75</item>
+        <item>114</item>
+        <item>130</item>
+        <item>152</item>
+        <item>175</item>
+        <item>200</item>
+        <item>215</item>
+        <item>235</item>
+        <item>255</item>
     </integer-array>
 
     <!-- Hardware 'face' keys present on the device, stored as a bit field.
@@ -181,18 +191,6 @@
     <!-- Is the battery LED intrusive? Used to decide if there should be a disable option -->
     <bool name="config_intrusiveBatteryLed">true</bool>
 
-    <!-- Does the notification LED support multiple colors?
-                  Used to decide if the user can change the colors -->
-    <bool name="config_multiColorNotificationLed">true</bool>
-
-    <!-- Does the battery LED support multiple colors?
-                  Used to decide if the user can change the colors -->
-    <bool name="config_multiColorBatteryLed">true</bool>
-
-    <!-- Do the battery/notification LEDs support pulsing?
-         Used to decide if we show pulse settings -->
-    <bool name="config_ledCanPulse">false</bool>
-
     <!-- Indicate whether the SD card is accessible without removing the battery. -->
     <bool name="config_batterySdCardAccessibility">true</bool>
 
@@ -206,36 +204,24 @@
 
     <!-- Flag indicating device support for EAP SIM, AKA, AKA' -->
     <bool name="config_eap_sim_based_auth_supported">true</bool>
-    
-<!-- Set this to true to enable the platform's auto-power-save modes like doze and
-        app standby.  These are not enabled by default because they require a standard
-        cloud-to-device messaging service for apps to interact correctly with the modes
-        (such as to be able to deliver an instant message to the device even when it is
-         dozing).  This should be enabled if you have such services and expect apps to
-         correctly use them when installed on your device.  Otherwise, keep this disabled
-         so that applications can still use their own mechanisms. -->
-    <bool name="config_enableAutoPowerModes">true</bool>
 
     <string name="config_useragentprofile_url" translatable="false">http://ua-profiles.cyngn.com/kipper/kipper-80c06e894c.rdf</string>
-	 
-	  <!-- Enable overlay for all location components. -->
- <string name="config_networkLocationProviderPackageName" translatable="false">com.qualcomm.location</string>
- <string name="config_fusedLocationProviderPackageName" translatable="false">com.qualcomm.location</string>
-	 
-	 <!-- Flag specifying whether VoLTE is available on device -->
-    <bool name="config_device_volte_available">true</bool>
 
-    <!-- Flag specifying whether VoLTE should be available for carrier: independent of
-         carrier provisioning. If false: hard disabled. If true: then depends on carrier
-         provisioning, availability etc -->
-    <bool name="config_carrier_volte_available">true</bool>
+    <!-- Enable overlay for all location components. 
+    <bool name="config_enableNetworkLocationOverlay" translatable="false">false</bool>
+    <string name="config_networkLocationProviderPackageName" translatable="false">com.qualcomm.location</string>
+    <bool name="config_enableFusedLocationOverlay" translatable="false">false</bool>
+    <string name="config_fusedLocationProviderPackageName" translatable="false">com.qualcomm.location</string> -->
 
-    <!-- Flag specifying whether VT is available on device -->
-    <bool name="config_device_vt_available">true</bool>
-
-    <!-- Flag specifying whether VT should be available for carrier: independent of
-         carrier provisioning. If false: hard disabled. If true: then depends on carrier
-         provisioning, availability etc -->
-    <bool name="config_carrier_vt_available">true</bool>
-
+    <!-- Component name of the combo network location provider. 
+    <string name="config_comboNetworkLocationProvider" translatable="false">com.qualcomm.location</string> -->
+	
+	<!-- Default list of files pinned by the Pinner Service -->
+    <string-array translatable="false" name="config_defaultPinnerServiceFiles">
+        <item>"/system/framework/arm64/boot-framework.oat"</item>
+        <item>"/system/framework/oat/arm64/services.odex"</item>
+        <item>"/system/framework/arm64/boot.oat"</item>
+        <item>"/system/framework/arm64/boot-core-libart.oat"</item>
+   </string-array>
+   
 </resources>
